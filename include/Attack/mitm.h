@@ -6,10 +6,10 @@
 #include "utils.h"
 
 /**
- * @brief 破解第5-12轮算法
+ * @brief 破解第5-8轮算法
  */
 template <int rounds>
-    requires (rounds >= 5 && rounds <= 12)
+    requires (rounds >= 5 && rounds <= 8)
 class MITM
 {
     public:
@@ -27,9 +27,9 @@ class MITM
         )
         {
             u64 key{};
-            const u32 cipher = oracle.getCipher(0);
             if constexpr (rounds < 7)
             {
+                const u32 cipher = oracle.getCipher(0);
                 std::unordered_map<u32, std::vector<u16>> backwardMap;
                 std::vector<std::vector<std::pair<u32, u16>>> localMap(threadsNum);
                 std::vector<std::pair<u32, u16>> possibleK012;
@@ -104,6 +104,7 @@ class MITM
             }
             else
             {
+                // todo
             }
             key = 0;
         end:

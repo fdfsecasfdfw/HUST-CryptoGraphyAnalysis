@@ -20,8 +20,6 @@ foreach(CONFIG ${CMAKE_CONFIGURATION_TYPES})
 endforeach()
 
 if(MSVC)
-    add_compile_options(/W4)
-    add_compile_options(/WX)
     add_compile_options(/arch:AVX2)
     add_compile_options(/utf-8)
 else()

@@ -121,7 +121,6 @@ class oracle
         explicit oracle(std::mt19937_64& rng) : key(utils::rand64(rng)) { BlockCipher::calRoundKey(key, roundKey, N); }
         explicit oracle(u64 key) : key(key) { BlockCipher::calRoundKey(key, roundKey, N); }
         [[nodiscard]] u32 getCipher(u32 word) const { return BlockCipher::EncryptWord(word, roundKey, N); }
-
         [[nodiscard]] u64 getKey() const { return key; }
         [[nodiscard]] const u16 * getRoundKey() const { return roundKey; }
 
