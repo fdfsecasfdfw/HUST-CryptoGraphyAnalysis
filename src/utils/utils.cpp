@@ -3,11 +3,6 @@
 #include <functional>
 #include <thread>
 
-u16 utils::bitwiseNot(const u16 x)
-{
-    return ~x;
-}
-
 u16 utils::shiftLeft(const u16 a, const int x)
 {
     if (x >= 16 || x <= -16) [[unlikely]]
