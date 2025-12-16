@@ -16,6 +16,8 @@ int main()
     std::vector<std::pair<u32, u32>> pc(num_pairs);
     const u64 key = utils::rand64(rng);
     u64 recoveredKey{};
+    std::cout << "true key: " << std::hex << key << std::dec << std::endl;
+    std::cout << "明密文对：" << std::endl;
 
     const oracle<rounds> oracle(key);
     for (int i = 0; i < num_pairs; i++)
@@ -26,7 +28,7 @@ int main()
         pc[i].second = ct;
         std::cout << "plaintext: " << std::hex << pt << " ciphertext: " << ct << std::dec << std::endl;
     }
-
+    std::cout << "-------------------------------------------------------" << std::endl;
     const auto start = std::chrono::steady_clock::now();
     [&]<int R>()
     {
@@ -59,11 +61,10 @@ int main()
         }
         else if constexpr (R > 4 && R < 7)
         {
-            recoveredKey = MITM<R>::crackCipher(pc, oracle);
+            recoveredKey = MITM<R>::crackCipher(pc, oracle, 4);
         }
     }.operator()<rounds>();
     const auto end = std::chrono::steady_clock::now();
-    std::cout << "true key: " << std::hex << key << std::dec << std::endl;
     const std::chrono::duration<double> diff = end - start;
 
     std::cout
